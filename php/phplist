@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# script to run phpList from commandline.
+#
+# edited to reflect paths in container and to use sh instead of bash
+
+PHPLIST=/var/www/html
+
+/usr/local/bin/php $PHPLIST/admin/index.php -c $PHPLIST/config/config.php $*
+

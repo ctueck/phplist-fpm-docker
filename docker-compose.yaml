@@ -1,0 +1,58 @@
+version: "3.0"
+
+services:
+
+  db:
+    image: mariadb:${MARIADB_TAG:-latest}
+    environment:
+      - MARIADB_DATABASE=${DB_NAME:-phplist}
+      - MARIADB_USER=${DB_USER:-phplist}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MARIADB_AUTO_UPGRADE=1
+    volumes:
+      - ./initdb.d:/docker-entrypoint-initdb.d:ro
+      - data:/var/lib/mysql
+
+  php:
+    build:
+      context: ./php
+    volumes:
+      - upload:/var/www/html/upload
+      - plugins:/var/www/html/admin/plugins
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT
+      - DB_NAME=${DB_NAME:-phplist}
+      - DB_USER=${DB_USER:-phplist}
+      - DB_PASSWORD
+      - ADMIN_PASSWORD
+      - ADMIN_EMAIL
+      - ALLOWED_REFERRERS
+      - ALLOWED_ORIGINS
+      - MAIL_RELAY
+      - MAIL_RELAY_PORT
+      - BOUNCE_MAILBOX_ADDRESS
+      - BOUNCE_MAILBOX_HOST
+      - BOUNCE_MAILBOX_USER
+      - BOUNCE_MAILBOX_PASSWORD
+      - BOUNCE_MAILBOX_PORT
+
+  web:
+    build:
+      context: ./nginx
+    depends_on:
+      - php
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    volumes:
+      - upload:/var/www/html/upload:ro
+      - plugins:/var/www/html/admin/plugins:ro
+
+volumes:
+  data:
+  upload:
+  plugins:
+
