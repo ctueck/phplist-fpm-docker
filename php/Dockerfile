@@ -49,9 +49,15 @@ RUN mkdir -p /tmp/plugin-install \
 
 # add adapted config, entrypoint & executable
 COPY config.php /var/www/html/config/
-COPY entrypoint.sh /bin/entrypoint.sh
+COPY entrypoint.* /bin
 COPY phplist /usr/local/bin
 RUN chmod +x /usr/local/bin/phplist
+
+# add crontab
+COPY crontab /tmp/phplist-crontab
+RUN crontab -u root -r \
+    && crontab -u www-data /tmp/phplist-crontab \
+    && rm /tmp/phplist-crontab
 
 WORKDIR /var/www/html
 

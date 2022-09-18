@@ -41,6 +41,36 @@ services:
       - BOUNCE_MAILBOX_PORT
       - PHPLIST_TEST_MODE
 
+  cron:
+    build:
+      context: ./php
+    volumes:
+      - upload:/var/www/html/upload
+      - plugins:/var/www/html/admin/plugins
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT
+      - DB_NAME=${DB_NAME:-phplist}
+      - DB_USER=${DB_USER:-phplist}
+      - DB_PASSWORD
+      - ADMIN_PASSWORD
+      - ADMIN_EMAIL
+      - ALLOWED_REFERRERS
+      - ALLOWED_ORIGINS
+      - MAIL_RELAY
+      - MAIL_RELAY_PORT
+      - BOUNCE_MAILBOX_ADDRESS
+      - BOUNCE_MAILBOX_HOST
+      - BOUNCE_MAILBOX_USER
+      - BOUNCE_MAILBOX_PASSWORD
+      - BOUNCE_MAILBOX_PORT
+      - PHPLIST_TEST_MODE
+    entrypoint: [ "/bin/entrypoint.cron.sh" ]
+    init: true
+    command: [ "crond", "-f", "-d", "6" ]
+
   web:
     build:
       context: ./nginx
