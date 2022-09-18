@@ -11,7 +11,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
         gd \
         xsl
 
-COPY getenv-docker.php /usr/local/lib/php
+COPY getenv-docker.php /usr/local/lib/php/
 
 # PHPlist version & hash
 ARG PHPLIST_VERSION=3.6.8
@@ -49,8 +49,8 @@ RUN mkdir -p /tmp/plugin-install \
 
 # add adapted config, entrypoint & executable
 COPY config.php /var/www/html/config/
-COPY entrypoint.* /bin
-COPY phplist /usr/local/bin
+COPY entrypoint.* /bin/
+COPY phplist /usr/local/bin/
 RUN chmod +x /usr/local/bin/phplist
 
 # add crontab
