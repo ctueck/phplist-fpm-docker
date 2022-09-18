@@ -39,6 +39,7 @@ services:
       - BOUNCE_MAILBOX_USER
       - BOUNCE_MAILBOX_PASSWORD
       - BOUNCE_MAILBOX_PORT
+      - PHPLIST_TEST_MODE
 
   web:
     build:
