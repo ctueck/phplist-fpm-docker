@@ -14,8 +14,8 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 COPY getenv-docker.php /usr/local/lib/php/
 
 # PHPlist version & hash
-ARG PHPLIST_VERSION=3.6.8
-ARG PHPLIST_HASH=bb82f62a66f09f79542e6c81cc8ffc6271bef2a8f70c9cdc3ae9237a8455f100
+ARG PHPLIST_VERSION=3.6.12
+ARG PHPLIST_HASH=9e9e510cc3283cc05aa28ad0bb8c4808c6c0c538cdb3a47aa33586f79fadc8ba
 
 # get PHPlist and move to /var/www/html, except plugins
 # (plugins rest on a volume, they are updated from distribution on container start)
