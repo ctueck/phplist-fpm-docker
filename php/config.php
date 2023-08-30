@@ -58,6 +58,9 @@ define('NOTIFY_SPAM', 1);
 // queue should be processed by cron container
 define('MANUALLY_PROCESS_QUEUE', 0);
 
+// throttling
+define('MAILQUEUE_THROTTLE', getenv_docker('MAILQUEUE_THROTTLE', 0.5));
+
 # PHPlist default is /lists, but this config is for running PHPlist from the webserver root
 $pageroot = "";
 
