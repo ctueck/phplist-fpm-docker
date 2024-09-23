@@ -3,7 +3,7 @@ version: "3.0"
 services:
 
   db:
-    image: mariadb:${MARIADB_TAG:-latest}
+    image: mariadb:11
     environment:
       - MARIADB_DATABASE=${DB_NAME:-phplist}
       - MARIADB_USER=${DB_USER:-phplist}
