@@ -1,4 +1,4 @@
-FROM php:8-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 # install required PHP extensions
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
@@ -14,8 +14,8 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 COPY getenv-docker.php /usr/local/lib/php/
 
 # PHPlist version & hash
-ARG PHPLIST_VERSION=3.6.15
-ARG PHPLIST_HASH=dfe441583f7f72b116c2f7db24821259df4fdc991ab52a7078ba3293729d71b9
+ARG PHPLIST_VERSION=3.6.16
+ARG PHPLIST_HASH=12c43ef7e1e785b9875e086172cbd15b26cd09d0b1ceb1755abb9ee05c57346c
 
 # get PHPlist and move to /var/www/html, except plugins
 # (plugins rest on a volume, they are updated from distribution on container start)
