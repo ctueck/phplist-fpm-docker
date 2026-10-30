@@ -17,8 +17,8 @@ echo " done."
 
 # make sure that upload & plugin dirs are writable for www-data
 echo -n "Making upload and plugin directories writable..."
-chown -R www-data.www-data $UPLOADIMAGES_DIR
-chown www-data.www-data $PLUGIN_DIR
+chown -R www-data:www-data $UPLOADIMAGES_DIR
+chown www-data:www-data $PLUGIN_DIR
 chmod 0775 $UPLOADIMAGES_DIR $PLUGIN_DIR
 echo " done."
 
