@@ -1,8 +1,8 @@
 FROM nginx:alpine
 
 # arguments
-ARG PHPLIST_VERSION=3.6.16
-ARG PHPLIST_HASH=12c43ef7e1e785b9875e086172cbd15b26cd09d0b1ceb1755abb9ee05c57346c
+ARG PHPLIST_VERSION=3.7.0
+ARG PHPLIST_HASH=614475133e5c0983f0021b95386a5f03ffe44f4640dd1079a1b083b7def57437
 
 # get PHPlist, move to /var/html/www
 # (except plugins, they rest on a volume populated by the php container)
