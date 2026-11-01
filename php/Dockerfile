@@ -38,14 +38,13 @@ RUN cd /tmp \
     && rm -rf phplist
 
 # pre-install PHPlist plugins
-RUN mkdir -p /tmp/plugin-install \
-    && cd /tmp/plugin-install \
-    && for url in \
-	https://github.com/bramley/phplist-plugin-viewbrowser/archive/master.zip \
-    ; do wget -O master.zip "$url" ; unzip master.zip ; rm master.zip ; done \
-    && mv -v phplist-plugin-*/plugins/* /opt/phplist/plugins/ \
-    && cd /tmp \
-    && rm -rf plugin-install
+ARG INSTALL_PLUGINS="https://github.com/bramley/phplist-plugin-viewbrowser/archive/master.tar.gz"
+RUN for url in $INSTALL_PLUGINS ; \
+       do tmpdir=$(mktemp -d) ; \
+       cd $tmpdir && wget -q -O plugin.tgz "$url" && tar --strip-components=1 -xzf plugin.tgz && \
+       rsync -rltDvu plugins/ /opt/phplist/plugins/ ; \
+       rm -rf $tmpdir ; done ; \
+       chown -R www-data:www-data /opt/phplist/plugins
 
 # add adapted config, entrypoint & executable
 COPY config.php /var/www/html/config/

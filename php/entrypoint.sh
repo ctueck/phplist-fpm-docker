@@ -12,7 +12,7 @@ mkdir -p $UPLOADIMAGES_DIR $PLUGIN_DIR
 
 # update pre-installed plugins from image
 echo -n "Updating pre-installed plugins..."
-rsync -au $PLUGIN_IMAGE_DIR/ $PLUGIN_DIR/
+rsync -avu $PLUGIN_IMAGE_DIR/ $PLUGIN_DIR/
 echo " done."
 
 # make sure that upload & plugin dirs are writable for www-data
